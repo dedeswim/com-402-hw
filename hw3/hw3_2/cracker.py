@@ -4,6 +4,7 @@ from dictionary_attack import dictionary_attack
 hashes_filename = 'hashes.txt'
 dictionary_filenames = [
     ('dictionaries/rockyou.txt', 'latin-1'),
+    # ('dictionaries/test.txt', 'utf-8')
 ]
 
 
@@ -12,11 +13,7 @@ with open(hashes_filename) as f:
 
 hashes = [x.strip() for x in hashes]
 
-couples = {
-    'e': 3,
-    'o': 0,
-    'i': 1
-}
+couples = { 'e': 3, 'o': 0, 'i': 1}
 
 cracked, total_time = dictionary_attack(dictionary_filenames, couples, hashes)
 
