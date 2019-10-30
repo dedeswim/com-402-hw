@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  client:
+    container_name: server
+    image: server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:80:80"
+      - "127.0.0.1:443:443"
+  verifier:
+    container_name: verifier
+    image: com402/hw4ex3_verifier
+    links:
+    - client
+    volumes:
+      - '.:/current_dir'

