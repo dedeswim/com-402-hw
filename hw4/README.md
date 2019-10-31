@@ -1,5 +1,6 @@
-
 # Homework 4
+
+**The original homework was posted [here](https://com402.epfl.ch/handouts/hw4.html).**
 
 ## Exercise 1: [attack] Sniffing credit cards numbers
 

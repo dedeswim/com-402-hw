@@ -1,4 +1,7 @@
 # Homework 2
+
+**The original homework was posted [here](https://com402.epfl.ch/handouts/hw2.html).**
+
 **Never use your actual GASPAR password on Com-402 exercises (if the login form is not Tequila).**
 
 ## Exercise 1: [attack] Cookie tampering

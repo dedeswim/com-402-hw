@@ -3,6 +3,8 @@
 This repo contains the homework for the graduate course [COM-402 Information Security and Privacy](https://edu.epfl.ch/coursebook/fr/information-security-and-privacy-COM-402), taught ad [EPFL](https://epfl.ch) by [Prof. C. Troncoso](http://carmelatroncoso.com/), [Prof Jean-Pierre Hubaux](https://people.epfl.ch/jean-pierre.hubaux) and [Prof. Philippe Oechslin
 ](https://lasec.epfl.ch/people/oechslin/).
 
+The website of the course, with all the assignments, can be found [here](https://com402.epfl.ch/).
+
 The topics of the different assignments are:
 
 - [Homework 0](hw0) - setup of homework environment: Docker, SQL and Python

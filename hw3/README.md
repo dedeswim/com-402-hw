@@ -1,5 +1,7 @@
 # Homework 3
 
+**The original homework was posted [here](https://com402.epfl.ch/handouts/hw3.html).**
+
 ## Exercise 1: Password Cracking
 
 The objective of this exercise is for you to crack some passwords. The exercise consists of three parts. In each part, the setting is slightly different modifying the way the cracking should be executed.  

@@ -1,5 +1,7 @@
 # COM402 Tools
 
+**The original homework was posted [here](https://com402.epfl.ch/handouts/hw0.html).**
+
 ## Operating Systems
 
 While some exercises, setups and assignments may work on Windows, some others are likely to cause problems. Thus, we strongly recommend you use a Linux distribution (e.g., Ubuntu) or OS X as your host operating system. If your main OS is Windows, then you could install Linux in a dual-boot fashion.

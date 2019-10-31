@@ -1,5 +1,7 @@
 # Homework 1: Stack Smashing
 
+**The original homework was posted [here](https://com402.epfl.ch/handouts/hw1.html).**
+
 In this exercise, you will be exploiting buffer overflows and other memory-safety bugs to obtain unauthorized root access. More precisely, you will interact with some flawed C programs, the `targets`, divert their execution flow and spawn a root shell.
 
 You will get four targets programs to crack. The **first three** are mandatory in order to prepare for the quiz. The fourth one is optional (we will not ask questions about it).
