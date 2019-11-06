@@ -1,4 +1,4 @@
-# EE-556 Homework
+# COM-402 Homework
 
 This repo contains the homework for the graduate course [COM-402 Information Security and Privacy](https://edu.epfl.ch/coursebook/fr/information-security-and-privacy-COM-402), taught ad [EPFL](https://epfl.ch) by [Prof. C. Troncoso](http://carmelatroncoso.com/), [Prof Jean-Pierre Hubaux](https://people.epfl.ch/jean-pierre.hubaux) and [Prof. Philippe Oechslin
 ](https://lasec.epfl.ch/people/oechslin/).

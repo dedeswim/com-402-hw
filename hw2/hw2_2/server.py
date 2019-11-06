@@ -9,14 +9,18 @@ app = Flask(__name__)
 
 cookie_name = "LoginCookie"
 
-new_random = lambda: os.urandom(20)
+
+def new_random(): return os.urandom(20)
+
 
 secret_dict = defaultdict(new_random)
+
 
 def compute_hmac(username, timestamp, user_type, user_secret):
 
     user_secret = secret_dict[username]
     return hmac.new(user_secret, bytes(username + timestamp + user_type, 'utf-8')).hexdigest().upper()
+
 
 def login_cookie_builder(username, timestamp, user_type):
 
@@ -25,45 +29,51 @@ def login_cookie_builder(username, timestamp, user_type):
     hmac_ = compute_hmac(username, str(timestamp), user_type, user_secret)
 
     cookie = '{username},{timestamp},com402,hw2,ex3,{type},{hmac_}'.format(
-            username=username, timestamp=str(timestamp), type=user_type, hmac_=hmac_
+        username=username, timestamp=str(timestamp), type=user_type, hmac_=hmac_
     )
 
     return b64encode(bytes(cookie, 'utf-8'))
 
-@app.route("/login",methods=['POST'])
+
+@app.route("/login", methods=['POST'])
 def login():
 
+    # Get username and password from POST data
     username = request.form['username']
     password = request.form['password']
 
+    # Check if username and password exist
     if (not username) | (not password):
         return 'Invalid login data', 401
 
+    # Get time and user type
     timestamp = round(time.time())
-
-    if username == 'admin' and password == '42':
-        response = make_response('Welcome admin!')
-        admin_type = 'admin'
-        login_cookie = login_cookie_builder(username, timestamp, admin_type)
-        response.set_cookie('LoginCookie', login_cookie)
-        
-        return response
+    user_type = 'admin' if username == 'admin' and password == '42' else 'user'
     
-    response = make_response('Welcome user!')
-    admin_type = 'user'
-    login_cookie = login_cookie_builder(username, timestamp, admin_type)
+    # Create appropriate response
+    response = create_response(user_type, username, timestamp)
+
+    return response
+
+def create_response(user_type, username, timestamp):
+    
+    # Create response and attach cookie
+    response = make_response('Welcome {user}!'.format(user=user_type))
+    login_cookie = login_cookie_builder(username, timestamp, user_type)
     response.set_cookie('LoginCookie', login_cookie)
     
     return response
 
-@app.route("/auth",methods=['GET'])
+
+@app.route("/auth", methods=['GET'])
 def auth():
 
-    login_cookie = b64decode(request.cookies.get('LoginCookie')).decode('utf-8')
+    login_cookie = b64decode(
+        request.cookies.get('LoginCookie')).decode('utf-8')
 
     if not login_cookie:
         return 'No cookie here...', 403
-    
+
     username_pos = 0
     timestamp_pos = 1
     type_pos = 5
@@ -76,6 +86,7 @@ def auth():
         timestamp = cookie_array[timestamp_pos]
         user_type = cookie_array[type_pos]
         cookie_hmac = cookie_array[hmac_pos]
+
     except IndexError:
         return 'Tampered cookie', 403
 
@@ -93,6 +104,7 @@ def auth():
 
     else:
         return 'Tampered cookie', 403
+
 
 if __name__ == '__main__':
     app.run()

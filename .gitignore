@@ -395,16 +395,9 @@ hw3/hw3_2/.vscode/
 
 hw3/hw3_3/dictionaries/
 
-hw4/ex3/device.key
-
-hw4/ex3/request.crt
-
-hw4/ex3/request.csr
-
-hw4/ex3/server/dhparam.pem
-
-hw4/ex3/server/nginx-selfsigned.crt
-
-hw4/ex3/server/nginx-selfsigned.key
-
-hw4/ex3/server/nginx-selfsigned.srl
+# Ignore keys
+*.crt
+*.srl
+*.key
+*.pem
+*.csr
