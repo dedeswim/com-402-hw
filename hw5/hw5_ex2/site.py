@@ -25,26 +25,26 @@ database = "hw5_ex2"
 @app.route("/messages", methods=["GET", "POST"])
 def messages():
     with db.cursor() as cursor:
-        sql = "SELECT name, message FROM messages"
+        # Create the base SQL query
+        sql = "SELECT DISTINCT name, message FROM messages"
 
+        # Make the query if there are no arguments
         if request.method == "GET":
             cursor.execute(sql)
             rows = cursor.fetchall()
-            return jsonify(rows), 200
-        
-        print(request)
-        data = request.get_json()
-        print(data)
-        try:
-            name = data['name']
-        except KeyError:
+            return jsonify(rows), 200        
+
+        # Get the name and return 500 if name is absent
+        name = request.form.get('name')
+        if not name:
             return "Invalid input", 500
 
+        # Add the name to the query, using a prepared statement
         sql += " WHERE name=%s"
-        print(sql)
         cursor.execute(sql, name)
-        rows = cursor.fetchall()
 
+        # Get the result and return them
+        rows = cursor.fetchall()
         return jsonify(rows), 200
 
 
@@ -58,28 +58,38 @@ def messages():
 def contact():
     with db.cursor() as cursor:
         
-        sql = "SELECT name FROM users"
-        
+        # Create the base query and get the result
+        sql = "SELECT DISTINCT name FROM users"       
         cursor.execute(sql)
         results = cursor.fetchall()
-        print(len(results))
+
+        # Create a list of names from the query result
         users = [result["name"] for result in results]
         
-        if not request.args.get('limit'):
-            return jsonify({"users": users}), 200
-
+        # Get the limit. If it is absent return everything
         limit = request.args.get('limit')
+        if not limit:
+            return jsonify({"users": users}), 200
         
+        # Try transforming the limit to int
         try:
+            # Transoform the limit to int
             limit = int(limit)
-            limited_users = users[:limit]
+            
+            # If limit is negative raise exeption
             if limit < 0:
                 raise IndexError
-        
-        except (ValueError, IndexError):
-            return "Invalid input", 500
+            
+            # Get the elements of the list until `limit`
+            # and return the result
+            limited_users = users[:limit]
+            return jsonify({"users": limited_users}), 200
 
-        return jsonify({"users": limited_users}), 200
+        # If `limit` is not an int, or it is bigger
+        # than the total number of results return 500
+        except (ValueError, IndexError):
+            return "Invalid input", 500 
+        
 
 if __name__ == "__main__":
     seed = "randomseed"
