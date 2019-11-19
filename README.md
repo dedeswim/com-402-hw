@@ -12,3 +12,5 @@ The topics of the different assignments are:
 - [Homework 2](hw2) - crypto for integrity and authentication: HMAC and PAKE
 - [Homework 3](hw3) - password cracking: brute force and dictionary attacks, bcrypt server
 - [Homework 4](hw4) - network attacks: sniffing, TLS downgrade, secure nginx configuration
+- [Homework 5](hw5) - SQL injection attacks, prepared statements as defense
+- [Homework 6](hw6) - Timing side channel attack to crack a _secret_ token
