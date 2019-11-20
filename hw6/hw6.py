@@ -48,8 +48,6 @@ def main():
         # Iterate over the space characters
             for letter in tqdm(space):
                 
-                # Loop with the 
-                
                 # Get how much time it takes to compute the result and get the result
                 elapsed = timeit(lambda: attempt_token(i, letter, token), number=NUMBER_TIMEIT) / NUMBER_TIMEIT
 
