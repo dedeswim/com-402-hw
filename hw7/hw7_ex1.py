@@ -2,14 +2,15 @@ from requests import post
 from phe import paillier
 from typing import List
 
-URL = 'http://localhost:8000'
+URL = 'http://localhost'
+PORT = '8000'
 END_POINT = '/prediction'
 
 
-def query_pred(input_vector: List[float], scale: int) -> int:
+def query_pred(input_vector: List[float]) -> int:
 
     public_key, private_key = paillier.generate_paillier_keypair()
-    
+
     encrypted_number_list = [
         int(public_key.encrypt(x, precision=2**(-16)).ciphertext()) for x in input_vector
     ]
@@ -19,18 +20,19 @@ def query_pred(input_vector: List[float], scale: int) -> int:
         'enc_feature_vector': encrypted_number_list
     }
 
-    response = post(URL + END_POINT, json=data)
+    response = post(URL + ':' + PORT + END_POINT, json=data)
 
     if response.status_code != 200:
         raise Exception(response.text)
 
     raw_enc_prediction = response.json()['enc_prediction']
 
-    enc_prediction = paillier.EncryptedNumber(public_key, raw_enc_prediction, exponent=-8)
+    enc_prediction = paillier.EncryptedNumber(
+        public_key, raw_enc_prediction, exponent=-8)
 
-    scaled_prediction = private_key.decrypt(enc_prediction)
+    prediction = private_key.decrypt(enc_prediction)
 
-    return scaled_prediction
+    return prediction
 
 
 def main():
@@ -42,7 +44,7 @@ def main():
                     0.00739207, 0.31390802, 0.37037496,
                     0.3375726]
 
-    prediction = query_pred(input_vector, SCALE)
+    prediction = query_pred(input_vector)
 
     print(prediction)
 
