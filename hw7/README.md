@@ -1,5 +1,7 @@
 # Homework 7
 
+**The original homework was posted [here](https://com402.epfl.ch/handouts/hw7.html).**
+
 ## Exercise 1: [PET] Homomorphic Encryption for ML Model Inference
 A company named SecureHealthTM provides an API to query what they call a “Health AI” in a private way. 
 According to their website, the company uses some complicated “novel medical AI method”, and sells predictions using their model.
