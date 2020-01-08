@@ -1,5 +1,4 @@
 # dp.py
-
 import csv
 import attr
 import numpy as np
@@ -19,6 +18,7 @@ class Rating:
     stars = attr.ib()
 
 # Unsure what Rating this? It is a convenient alternative to namedtuple.
+
 
 class DpQuerySession:
     """
@@ -44,9 +44,9 @@ class DpQuerySession:
             reader = csv.reader(f, quotechar='"', delimiter=",")
             for email, movie, date, stars in reader:
                 self._entries.append(
-                    Rating(user=email, movie=movie, date=date, stars=int(stars))
+                    Rating(user=email, movie=movie,
+                           date=date, stars=int(stars))
                 )
-
 
     @property
     def remaining_budget(self):
@@ -79,7 +79,7 @@ class DpQuerySession:
         # Question: Converting to a positive integer does not affect privacy. Why?
 
         if epsilon <= 0:
-            raise ValueError("epsilon should be >= 0")
+            raise ValueError("epsilon should be > 0")
 
         if (movie_name, rating_threshold) not in self._queries:
             self._used_budget += epsilon
@@ -89,16 +89,16 @@ class DpQuerySession:
 
         count = len(
             list(
-                    filter(
-                        lambda movie: movie.movie == movie_name and movie.stars >= rating_threshold,
-                        self._entries
-                    )
+                filter(
+                    lambda movie: movie.movie == movie_name and movie.stars >= rating_threshold,
+                    self._entries
                 )
             )
-        
+        )
+
         if (movie_name, rating_threshold) in self._queries:
             noise = self._queries[(movie_name, rating_threshold)]
-        
+
         else:
             noise = np.random.laplace(scale=(self.SENSITIVITY / epsilon))
             self._queries[(movie_name, rating_threshold)] = noise

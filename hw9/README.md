@@ -1,5 +1,7 @@
 # Homework 9: A Tiny Blockchain in Python
 
+**The original homework was posted [here](https://com402.epfl.ch/handouts/hw9.html).**
+
 In this homework, you will write a simple miner on an permissionless blockchain using proof-of-work.
 The present handout will guide you through the implementation steps, but feel free to diverge from the suggested design.
 As the final task of this homework, you will run you miner against an existing implementation that we provide.

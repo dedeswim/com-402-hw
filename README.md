@@ -16,3 +16,4 @@ The topics of the different assignments are:
 - [Homework 6](hw6) - Timing side channel attack to crack a _secret_ token.
 - [Homework 7](hw7) - Machine Learning model stealing.
 - [Homework 8](hw8) - Database de-anonymization and differential privacy as defense.
+- [Homework 9](hw9) - Blockchain (not-completed yet).

@@ -37,8 +37,6 @@ def query_pred(input_vector: List[float]) -> int:
 
 def main():
 
-    SCALE = 1e10
-
     input_vector = [0.48555949, 0.29289251, 0.63463107,
                     0.41933057, 0.78672205, 0.58910837,
                     0.00739207, 0.31390802, 0.37037496,
